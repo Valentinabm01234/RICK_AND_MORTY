@@ -10,6 +10,9 @@ import Profile from './components/Profile/Profile.jsx';
 import Person from './components/Person/Person';
 import Detail from './components/Detail/Detail.jsx';
 import Forms from './components/forms/Forms';
+import favorites from './components/favorties/favorites';
+
+
 const EMAIL = 'ejemplo@gmail.com';
 const PASSWORD = 'unajeje1';
 
@@ -35,13 +38,23 @@ function App() {
     const navigate = useNavigate();
     const [access, setAccess] = useState(false);
    
-    
-    function login(userData) {
-       if (userData.password === PASSWORD && userData.email === EMAIL) {
-          setAccess(true);
-          navigate('/home');
-       }
-    };
+    const login = (userData) => {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`)
+      .then(({ data }) => {
+         const { access } = data;
+         setAccess(access);
+         access && navigate('/home');
+      });
+   };
+   //  function login(userData) {
+   //     if (userData.password === PASSWORD && userData.email === EMAIL) {
+   //        setAccess(true);
+   //        navigate('/home');
+   //     }
+   //  };
+
     useEffect(() => {
       !access && navigate('/');
    }, [access]);
@@ -74,9 +87,10 @@ const onClose =(id)=> {
 
          <Routes>
          <Route path ='/' element = {<Forms login={login} />}/>
-<Route path ='/home' element={<Cards characters={characters} onClose={onClose} />}/>
-<Route path ='/about' element = {<About />}/>
-<Route path ='/detail/:id' element = {<Detail />}/>
+         <Route path ='/home' element={<Cards characters={characters} onClose={onClose} />}/>
+         <Route path ='/about' element = {<About />}/>
+         <Route path ='/detail/:id' element = {<Detail />}/>
+         <Route path='/favorites' element={<favorites/>}/>
          </Routes>
       </div>
 

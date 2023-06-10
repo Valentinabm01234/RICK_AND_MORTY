@@ -20,6 +20,10 @@ const Navbar = ({onSearch}) => {
     <button>About</button>
     </NavLink>
 
+    <NavLink to = '/favorites'>
+    <button>Favorites</button>
+    </NavLink>
+
         </div>
 
     );
