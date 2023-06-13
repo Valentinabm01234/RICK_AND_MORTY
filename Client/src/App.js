@@ -67,7 +67,7 @@ const onSearch = async (id) => {
       const {data} = await axios(`https://rickandmortyapi.com/api/character/${id}`)
                                   //"http://localhost:3001/rickandmorty/character/${id}"
          // .then(response => response.data)
-         // .then(({ data }) => {
+         // .then(({ data }) => {});
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data])
          }   
