@@ -1,9 +1,9 @@
 import Card from "../card/Card";
 import { Connect, connect, useDispatch } from "react-redux";
-import { filterCards, orderCards } from "../../redux/actions";
+import { filterCards, orderCards } from "../redux/actions";
 import { useState } from "react";
 
-const favorites = ({myFavorites}) => {
+const Favorites = ({myFavorites}) => {
 
     const dispatch = useDispatch();
 
@@ -53,11 +53,11 @@ const favorites = ({myFavorites}) => {
 
 const mapStateToProps = (state) => {
     return {
-        myFavorites: state.favorites 
+        myFavorites: state.Favorites 
     }
 };
 
 export default connect(
     mapStateToProps,
     null
-)(favorites);
+)(Favorites);
